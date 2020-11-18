@@ -7,16 +7,23 @@ const inProduction = process.env.NODE_ENV === 'production'
 
 console.log({ inProduction })
 
-gulp.task('default', done => {
-    gulp.src('src/main.scss')
-        .pipe(
-            sass({
-                outputStyle: inProduction ? 'compressed' : 'expanded'
-            })
-        )
-        .pipe(gulp.dest('dist/'))
+const build = done => {
+gulp.src('src/main.scss')
+    .pipe(
+        sass({
+            outputStyle: inProduction ? 'compressed' : 'expanded'
+        })
+    )
+    .pipe(gulp.dest('dist/'))
 
     done()
-})
+}
+
+const watchBuild = () => {
+    gulp.watch('src/**/*.scss', gulp.parallel([build]))
+}
+
+exports.default = build
+exports.watch = watchBuild
 
     
