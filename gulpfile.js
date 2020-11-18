@@ -8,7 +8,7 @@ const inProduction = process.env.NODE_ENV === 'production'
 console.log({ inProduction })
 
 const build = done => {
-gulp.src('src/main.scss')
+gulp.src('src/bramble.scss')
     .pipe(
         sass({
             outputStyle: inProduction ? 'compressed' : 'expanded'
